@@ -268,5 +268,105 @@
     "tags": ["코드품질", "리팩토링", "개발방법론"],
     "related": ["engineering-001"],
     "difficulty": "beginner"
+  },
+  {
+    "id": "ai-006",
+    "term": "Prompt Engineering",
+    "termKo": "프롬프트 엔지니어링",
+    "definition": "LLM에서 원하는 출력을 얻기 위해 입력 프롬프트를 체계적으로 설계·최적화하는 기술. Few-shot, Chain-of-Thought 등의 기법이 대표적이다.",
+    "category": "ai",
+    "tags": ["AI", "LLM", "프롬프트"],
+    "related": ["ai-001", "ai-004"],
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "ai-007",
+    "term": "Fine-tuning",
+    "termKo": "파인튜닝",
+    "definition": "사전학습된 모델을 특정 도메인·태스크 데이터로 추가 학습시켜 성능을 특화하는 기법. 전체 파라미터를 조정하는 Full Fine-tuning과 일부만 조정하는 PEFT(LoRA 등) 방식이 있다.",
+    "category": "ai",
+    "tags": ["AI", "LLM", "머신러닝"],
+    "related": ["ai-001", "ai-003"],
+    "difficulty": "advanced"
+  },
+  {
+    "id": "network-005",
+    "term": "CDN",
+    "termKo": "콘텐츠 전송 네트워크",
+    "definition": "전 세계 분산된 엣지 서버에 콘텐츠를 캐싱해 사용자와 가장 가까운 서버에서 제공하는 네트워크. 응답 속도를 높이고 오리진 서버 부하를 줄인다.",
+    "category": "network",
+    "tags": ["네트워크", "성능", "캐시"],
+    "related": ["network-004", "cloud-001"],
+    "difficulty": "beginner"
+  },
+  {
+    "id": "network-006",
+    "term": "VPN",
+    "termKo": "가상 사설망",
+    "definition": "공개 네트워크 위에 암호화된 터널을 생성해 사설 네트워크처럼 안전하게 통신하는 기술. 원격 근무 환경에서 내부망 접근이나 트래픽 보호에 활용된다.",
+    "category": "network",
+    "tags": ["네트워크", "보안", "암호화"],
+    "related": ["network-001", "security-003"],
+    "difficulty": "beginner"
+  },
+  {
+    "id": "cloud-005",
+    "term": "IaC",
+    "termKo": "코드형 인프라",
+    "definition": "서버·네트워크·DB 등 인프라를 코드 파일로 정의하고 버전 관리하는 방식. Terraform, AWS CloudFormation 등의 도구를 사용해 수동 설정 없이 인프라를 자동 프로비저닝한다.",
+    "category": "cloud",
+    "tags": ["클라우드", "DevOps", "자동화"],
+    "related": ["cloud-004", "cloud-002"],
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "dev-005",
+    "term": "WebSocket",
+    "termKo": "웹소켓",
+    "definition": "단일 TCP 연결 위에서 서버와 클라이언트가 양방향으로 실시간 메시지를 주고받을 수 있는 프로토콜. HTTP의 요청-응답 모델과 달리 연결을 유지하며 지속적으로 데이터를 교환한다.",
+    "category": "dev",
+    "tags": ["개발", "웹", "실시간"],
+    "related": ["dev-001", "network-003"],
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "dev-006",
+    "term": "Git",
+    "termKo": "깃",
+    "definition": "소스 코드 변경 이력을 추적하고 여러 개발자가 협업할 수 있게 지원하는 분산 버전 관리 시스템. 브랜치·머지·리베이스 등을 통해 병렬 개발 흐름을 관리한다.",
+    "category": "dev",
+    "tags": ["개발", "버전관리", "협업"],
+    "related": ["cloud-004"],
+    "difficulty": "beginner"
+  },
+  {
+    "id": "security-005",
+    "term": "OAuth 2.0",
+    "termKo": "오픈 인증 2.0",
+    "definition": "사용자가 비밀번호를 제공하지 않고 제3자 애플리케이션에 리소스 접근 권한을 위임하는 인증 위임 프로토콜. 'Google로 로그인' 같은 소셜 로그인의 기반이다.",
+    "category": "security",
+    "tags": ["보안", "인증", "인가"],
+    "related": ["security-004", "security-003"],
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "security-006",
+    "term": "CSRF",
+    "termKo": "사이트 간 요청 위조",
+    "definition": "인증된 사용자의 브라우저를 통해 공격자가 의도한 요청을 서버에 몰래 전송하는 공격. CSRF 토큰이나 SameSite 쿠키 속성으로 방어한다.",
+    "category": "security",
+    "tags": ["보안", "웹", "OWASP"],
+    "related": ["security-001", "security-004"],
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "data-004",
+    "term": "ETL",
+    "termKo": "추출·변환·적재",
+    "definition": "다양한 소스에서 데이터를 추출(Extract)하고 분석에 적합한 형태로 변환(Transform)한 뒤 데이터 웨어하우스에 적재(Load)하는 데이터 파이프라인 과정.",
+    "category": "data",
+    "tags": ["데이터", "파이프라인", "데이터엔지니어링"],
+    "related": ["data-001", "data-002"],
+    "difficulty": "intermediate"
   }
 ]
