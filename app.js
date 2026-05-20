@@ -62,6 +62,7 @@ const CATEGORIES = {
   security:    { label: '보안',     icon: '🔒' },
   data:        { label: '데이터',   icon: '🗄️' },
   engineering: { label: '공학',     icon: '🛠️' },
+  malware:     { label: '멀웨어',   icon: '🦠' },
 };
 
 const DIFFICULTY_LABELS = {

@@ -568,5 +568,105 @@
     "tags": ["보안", "OWASP", "설정"],
     "related": ["security-025", "security-022"],
     "difficulty": "beginner"
+  },
+  {
+    "id": "malware-001",
+    "term": "Ransomware",
+    "termKo": "랜섬웨어",
+    "definition": "피해자의 파일을 암호화한 뒤 복호화 키와 금전(주로 암호화폐)을 맞교환하는 악성 코드. 2017년 WannaCry, 2021년 Colonial Pipeline 사건이 대표적이며 기업·병원·공공기관이 주요 표적이다.",
+    "category": "malware",
+    "tags": ["멀웨어", "암호화", "사이버범죄"],
+    "related": ["malware-003", "malware-006", "security-022"],
+    "difficulty": "beginner"
+  },
+  {
+    "id": "malware-002",
+    "term": "Trojan Horse",
+    "termKo": "트로이 목마",
+    "definition": "정상적인 소프트웨어로 위장해 사용자가 스스로 설치하도록 유도하는 악성 코드. 설치 후 백도어 생성, 정보 탈취, 원격 제어 등의 악의적 동작을 수행한다.",
+    "category": "malware",
+    "tags": ["멀웨어", "백도어", "사회공학"],
+    "related": ["malware-008", "malware-004", "security-010"],
+    "difficulty": "beginner"
+  },
+  {
+    "id": "malware-003",
+    "term": "Worm",
+    "termKo": "웜",
+    "definition": "숙주 파일 없이 네트워크를 통해 자가 복제·전파되는 악성 코드. 사용자 개입 없이 취약한 시스템으로 확산되며 대역폭 소모, DDoS, 랜섬웨어 전파 경로로 활용된다.",
+    "category": "malware",
+    "tags": ["멀웨어", "네트워크", "자가복제"],
+    "related": ["malware-001", "malware-002", "security-010"],
+    "difficulty": "beginner"
+  },
+  {
+    "id": "malware-004",
+    "term": "Rootkit",
+    "termKo": "루트킷",
+    "definition": "OS 커널이나 부트로더 수준에서 동작하며 자신과 다른 악성 코드의 존재를 숨기는 악성 소프트웨어. 탐지와 제거가 매우 어려우며 장기 잠복 후 데이터 탈취나 스파이 활동에 사용된다.",
+    "category": "malware",
+    "tags": ["멀웨어", "은닉", "커널"],
+    "related": ["malware-002", "malware-005", "security-015"],
+    "difficulty": "advanced"
+  },
+  {
+    "id": "malware-005",
+    "term": "Keylogger",
+    "termKo": "키로거",
+    "definition": "사용자의 키보드 입력을 몰래 기록해 비밀번호·신용카드 번호·개인정보를 탈취하는 악성 코드. 소프트웨어 방식과 물리적 하드웨어 방식이 있으며 스파이웨어의 한 유형이다.",
+    "category": "malware",
+    "tags": ["멀웨어", "정보탈취", "스파이웨어"],
+    "related": ["malware-007", "malware-004"],
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "malware-006",
+    "term": "Botnet",
+    "termKo": "봇넷",
+    "definition": "악성 코드에 감염된 다수의 컴퓨터(봇)를 C2(명령·제어) 서버로 원격 조종하는 네트워크. DDoS 공격, 스팸 발송, 랜섬웨어 배포, 암호화폐 채굴 등에 악용된다.",
+    "category": "malware",
+    "tags": ["멀웨어", "C2", "DDoS"],
+    "related": ["malware-001", "malware-008", "network-001"],
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "malware-007",
+    "term": "Spyware",
+    "termKo": "스파이웨어",
+    "definition": "사용자 동의 없이 설치되어 browsing 습관·위치·금융 정보 등을 수집해 외부로 전송하는 악성 소프트웨어. 키로거, 애드웨어와 함께 정보 탈취형 멀웨어의 대표 유형이다.",
+    "category": "malware",
+    "tags": ["멀웨어", "정보탈취", "개인정보"],
+    "related": ["malware-005", "malware-009"],
+    "difficulty": "beginner"
+  },
+  {
+    "id": "malware-008",
+    "term": "RAT",
+    "termKo": "원격 접근 트로이 목마",
+    "definition": "공격자가 감염된 시스템을 원격으로 완전히 제어할 수 있게 해주는 트로이 목마. 화면 캡처·웹캠 접근·파일 관리·명령 실행이 가능하며 APT 공격의 주요 도구로 사용된다.",
+    "category": "malware",
+    "tags": ["멀웨어", "원격제어", "APT"],
+    "related": ["malware-002", "malware-006", "security-010"],
+    "difficulty": "advanced"
+  },
+  {
+    "id": "malware-009",
+    "term": "Adware",
+    "termKo": "애드웨어",
+    "definition": "사용자 동의 없이 광고를 강제 노출하거나 브라우저 설정을 변조하는 소프트웨어. 수익화를 목적으로 하며 직접적 피해는 낮지만 스파이웨어 기능이 포함된 경우 개인정보 유출로 이어진다.",
+    "category": "malware",
+    "tags": ["멀웨어", "광고", "PUP"],
+    "related": ["malware-007"],
+    "difficulty": "beginner"
+  },
+  {
+    "id": "malware-010",
+    "term": "Fileless Malware",
+    "termKo": "파일리스 멀웨어",
+    "definition": "디스크에 파일을 저장하지 않고 PowerShell·WMI 같은 정상 시스템 도구와 메모리만을 이용해 동작하는 악성 코드. 파일 기반 백신 탐지를 우회해 발견과 포렌식 분석이 매우 어렵다.",
+    "category": "malware",
+    "tags": ["멀웨어", "은닉", "메모리"],
+    "related": ["malware-004", "malware-008", "security-015"],
+    "difficulty": "advanced"
   }
 ]
