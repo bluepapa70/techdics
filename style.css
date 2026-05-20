@@ -343,8 +343,8 @@ input, select {
   gap: 6px;
   overflow-x: auto;
   padding: 20px 0 4px;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
+  scrollbar-width: none;        /* Firefox 64+ */
+  -ms-overflow-style: none;     /* IE/Edge */
 }
 
 .tabs-wrap::-webkit-scrollbar { display: none; }
@@ -609,6 +609,7 @@ input, select {
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, .55);
+  -webkit-backdrop-filter: blur(4px);
   backdrop-filter: blur(4px);
   z-index: 200;
   display: flex;
