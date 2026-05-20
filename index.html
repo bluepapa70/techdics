@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<!-- IT 용어 사전 서비스의 메인 페이지 -->
+<html lang="ko" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="AI, 네트워크, 클라우드, 보안 등 IT 분야 용어를 빠르게 검색하는 사전 서비스">
+  <title>TechDics — IT 용어 사전</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ══ 헤더 ══ -->
+  <header class="header">
+    <div class="header-inner">
+      <a class="logo" href="#" aria-label="TechDics 홈">
+        <span class="logo-icon">📖</span>
+        <span class="logo-text">TechDics</span>
+        <span class="logo-sub">IT 용어 사전</span>
+      </a>
+      <div class="header-actions">
+        <button id="btn-favorites" class="btn-icon" aria-label="즐겨찾기 보기" title="즐겨찾기">
+          <span class="icon">⭐</span>
+          <span class="btn-label">즐겨찾기</span>
+          <span id="favorites-count" class="badge hidden">0</span>
+        </button>
+        <button id="btn-dark" class="btn-icon" aria-label="다크 모드 전환" title="다크 모드">
+          <span class="icon" id="dark-icon">🌙</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ══ 히어로 검색 영역 ══ -->
+  <div class="hero">
+    <div class="hero-inner">
+      <h1 class="hero-title">IT 용어를 빠르게 찾아보세요</h1>
+      <p class="hero-desc">AI · 네트워크 · 클라우드 · 보안 · 데이터 · 개발 분야 200개 이상의 용어 수록</p>
+      <div class="search-wrap">
+        <span class="search-icon" aria-hidden="true">🔍</span>
+        <input
+          type="search"
+          id="search-input"
+          class="search-input"
+          placeholder="용어 검색 (한국어 · English 동시 지원)"
+          autocomplete="off"
+          spellcheck="false"
+          aria-label="용어 검색"
+        >
+        <button id="search-clear" class="search-clear hidden" aria-label="검색어 지우기">✕</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ 메인 콘텐츠 ══ -->
+  <main class="main">
+
+    <!-- 카테고리 탭 -->
+    <div class="tabs-wrap" role="tablist" aria-label="카테고리 필터">
+      <button class="tab active" data-category="all"    role="tab" aria-selected="true">
+        <span>전체</span>
+      </button>
+      <button class="tab" data-category="ai"            role="tab" aria-selected="false">
+        <span>🤖 AI</span>
+      </button>
+      <button class="tab" data-category="network"       role="tab" aria-selected="false">
+        <span>🌐 네트워크</span>
+      </button>
+      <button class="tab" data-category="cloud"         role="tab" aria-selected="false">
+        <span>☁️ 클라우드</span>
+      </button>
+      <button class="tab" data-category="dev"           role="tab" aria-selected="false">
+        <span>💻 개발</span>
+      </button>
+      <button class="tab" data-category="security"      role="tab" aria-selected="false">
+        <span>🔒 보안</span>
+      </button>
+      <button class="tab" data-category="data"          role="tab" aria-selected="false">
+        <span>🗄️ 데이터</span>
+      </button>
+      <button class="tab" data-category="engineering"   role="tab" aria-selected="false">
+        <span>🛠️ 공학</span>
+      </button>
+    </div>
+
+    <!-- 결과 정보 바 -->
+    <div class="results-bar">
+      <span id="results-count" class="results-count">로딩 중...</span>
+      <div class="sort-wrap">
+        <label for="sort-select" class="sr-only">정렬 기준</label>
+        <select id="sort-select" class="sort-select" aria-label="정렬 기준">
+          <option value="term">가나다순</option>
+          <option value="difficulty">난이도순</option>
+          <option value="category">카테고리순</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- 카드 그리드 -->
+    <div id="cards-container" class="cards-grid" role="list" aria-label="용어 목록">
+      <!-- JS로 카드를 동적 렌더링 -->
+    </div>
+
+    <!-- 결과 없음 메시지 -->
+    <div id="empty-state" class="empty-state hidden" aria-live="polite">
+      <div class="empty-icon">🔎</div>
+      <p class="empty-title">검색 결과가 없습니다</p>
+      <p class="empty-desc">다른 키워드로 검색하거나 카테고리를 변경해 보세요.</p>
+    </div>
+
+    <!-- 즐겨찾기 빈 상태 -->
+    <div id="favorites-empty" class="empty-state hidden" aria-live="polite">
+      <div class="empty-icon">⭐</div>
+      <p class="empty-title">즐겨찾기가 없습니다</p>
+      <p class="empty-desc">용어 카드의 ☆ 버튼을 눌러 즐겨찾기에 추가하세요.</p>
+    </div>
+
+  </main>
+
+  <!-- ══ 용어 상세 모달 ══ -->
+  <div id="modal-overlay" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="modal-term">
+    <div class="modal" id="modal-box">
+      <button id="modal-close" class="modal-close" aria-label="모달 닫기">✕</button>
+
+      <div class="modal-header">
+        <div class="modal-term-wrap">
+          <h2 id="modal-term" class="modal-term"></h2>
+          <span id="modal-term-ko" class="modal-term-ko"></span>
+        </div>
+        <div class="modal-meta">
+          <span id="modal-category-badge" class="category-badge"></span>
+          <span id="modal-difficulty-badge" class="difficulty-badge"></span>
+        </div>
+      </div>
+
+      <div class="modal-body">
+        <p id="modal-definition" class="modal-definition"></p>
+
+        <div id="modal-tags-wrap" class="modal-section">
+          <h3 class="modal-section-title">태그</h3>
+          <div id="modal-tags" class="tags-list"></div>
+        </div>
+
+        <div id="modal-related-wrap" class="modal-section">
+          <h3 class="modal-section-title">관련 용어</h3>
+          <div id="modal-related" class="related-list"></div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button id="modal-favorite-btn" class="btn-favorite-modal" aria-label="즐겨찾기 토글">
+          <span id="modal-favorite-icon">☆</span>
+          <span id="modal-favorite-label">즐겨찾기에 추가</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ 로딩 스피너 ══ -->
+  <div id="loading" class="loading-overlay" aria-label="로딩 중">
+    <div class="spinner"></div>
+    <p>데이터 로딩 중...</p>
+  </div>
+
+  <!-- ══ 토스트 알림 ══ -->
+  <div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
+
+  <footer class="footer">
+    <p>TechDics · IT 용어 사전 · HTML/CSS/JS Only · <a href="https://github.com/bluepapa70/techdics" target="_blank" rel="noopener">GitHub</a></p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

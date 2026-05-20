@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TechDics — IT 용어 사전 웹서비스 구축 계획서</title>
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-light: #dbeafe;
+      --primary-dark: #1d4ed8;
+      --accent: #7c3aed;
+      --success: #059669;
+      --warning: #d97706;
+      --bg: #f8fafc;
+      --surface: #ffffff;
+      --surface2: #f1f5f9;
+      --border: #e2e8f0;
+      --text: #0f172a;
+      --text-muted: #64748b;
+      --code-bg: #0f172a;
+      --code-text: #e2e8f0;
+      --radius: 12px;
+      --shadow: 0 1px 3px rgba(0,0,0,.08), 0 4px 16px rgba(0,0,0,.06);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans KR", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 15px;
+    }
+
+    /* ── Hero 헤더 ── */
+    .hero {
+      background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 50%, #7c3aed 100%);
+      color: white;
+      padding: 60px 24px 50px;
+      text-align: center;
+    }
+    .hero-badge {
+      display: inline-block;
+      background: rgba(255,255,255,.15);
+      border: 1px solid rgba(255,255,255,.3);
+      padding: 4px 14px;
+      border-radius: 99px;
+      font-size: 12px;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+    .hero h1 {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 800;
+      letter-spacing: -.02em;
+      margin-bottom: 14px;
+    }
+    .hero p {
+      font-size: 1rem;
+      opacity: .85;
+      max-width: 560px;
+      margin: 0 auto 28px;
+    }
+    .hero-goal {
+      background: rgba(255,255,255,.12);
+      border: 1px solid rgba(255,255,255,.25);
+      border-radius: var(--radius);
+      padding: 16px 24px;
+      max-width: 680px;
+      margin: 0 auto;
+      font-size: .92rem;
+      text-align: left;
+      line-height: 1.6;
+    }
+    .hero-goal strong { color: #fde68a; }
+
+    /* ── 레이아웃 ── */
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 48px 24px 80px;
+    }
+
+    /* ── 섹션 ── */
+    .section { margin-bottom: 52px; }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .section-num {
+      background: var(--primary);
+      color: white;
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .8rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .section-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    /* ── 카드 ── */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    /* ── 테이블 ── */
+    .table-wrap { overflow-x: auto; border-radius: var(--radius); box-shadow: var(--shadow); }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--surface);
+      font-size: .92rem;
+    }
+    thead th {
+      background: var(--primary);
+      color: white;
+      padding: 12px 16px;
+      text-align: left;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    thead th:first-child { border-radius: var(--radius) 0 0 0; }
+    thead th:last-child  { border-radius: 0 var(--radius) 0 0; }
+    tbody tr:nth-child(even) { background: var(--surface2); }
+    tbody tr:hover { background: var(--primary-light); }
+    td { padding: 11px 16px; border-bottom: 1px solid var(--border); vertical-align: top; }
+    td code, th code {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1px 6px;
+      font-size: .85em;
+      font-family: "JetBrains Mono", "Fira Code", monospace;
+      color: var(--primary-dark);
+    }
+
+    /* ── 개요 그리드 ── */
+    .overview-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px;
+    }
+    .overview-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px 20px;
+      box-shadow: var(--shadow);
+    }
+    .overview-label {
+      font-size: .75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+    .overview-value {
+      font-size: .95rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    /* ── 카테고리 카드 ── */
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+    }
+    .cat-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      box-shadow: var(--shadow);
+      transition: transform .15s, box-shadow .15s;
+    }
+    .cat-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,.1); }
+    .cat-card-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .cat-icon { font-size: 1.5rem; }
+    .cat-name { font-weight: 700; font-size: 1rem; }
+    .cat-count {
+      margin-left: auto;
+      background: var(--primary-light);
+      color: var(--primary-dark);
+      border-radius: 99px;
+      padding: 2px 10px;
+      font-size: .75rem;
+      font-weight: 700;
+    }
+    .cat-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .tag {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 2px 8px;
+      font-size: .75rem;
+      color: var(--text-muted);
+    }
+
+    /* ── 파일 트리 ── */
+    .file-tree {
+      background: var(--code-bg);
+      color: var(--code-text);
+      border-radius: var(--radius);
+      padding: 24px 28px;
+      font-family: "JetBrains Mono", "Fira Code", monospace;
+      font-size: .88rem;
+      line-height: 2;
+      overflow-x: auto;
+    }
+    .file-tree .dir  { color: #93c5fd; font-weight: 600; }
+    .file-tree .file { color: #86efac; }
+    .file-tree .comment { color: #94a3b8; }
+
+    /* ── 코드 블록 ── */
+    .code-block {
+      background: var(--code-bg);
+      color: var(--code-text);
+      border-radius: var(--radius);
+      padding: 20px 24px;
+      font-family: "JetBrains Mono", "Fira Code", monospace;
+      font-size: .85rem;
+      line-height: 1.7;
+      overflow-x: auto;
+    }
+    .code-block .key   { color: #93c5fd; }
+    .code-block .str   { color: #86efac; }
+    .code-block .arr   { color: #fca5a5; }
+    .code-block .punct { color: #94a3b8; }
+
+    /* ── 기능 명세 ── */
+    .feature-list { display: flex; flex-direction: column; gap: 16px; }
+    .feature-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--primary);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 16px 20px;
+      box-shadow: var(--shadow);
+    }
+    .feature-item h4 {
+      font-size: .95rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--primary-dark);
+    }
+    .feature-item ul { padding-left: 18px; }
+    .feature-item li { font-size: .9rem; color: var(--text-muted); margin-bottom: 4px; }
+
+    /* ── 로드맵 타임라인 ── */
+    .roadmap { display: flex; flex-direction: column; gap: 0; }
+    .roadmap-step {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 0 24px;
+      position: relative;
+    }
+    .roadmap-step:not(:last-child)::before {
+      content: '';
+      position: absolute;
+      left: 59px;
+      top: 40px;
+      bottom: -12px;
+      width: 2px;
+      background: var(--border);
+    }
+    .roadmap-week {
+      padding-top: 12px;
+      text-align: right;
+    }
+    .week-badge {
+      display: inline-block;
+      background: var(--primary);
+      color: white;
+      border-radius: 99px;
+      padding: 4px 14px;
+      font-size: .8rem;
+      font-weight: 700;
+    }
+    .roadmap-body {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px 20px;
+      margin-bottom: 16px;
+      box-shadow: var(--shadow);
+    }
+    .roadmap-body h4 { font-weight: 700; margin-bottom: 10px; font-size: .95rem; }
+    .checklist { list-style: none; padding: 0; }
+    .checklist li {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: .88rem;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+    .checklist li::before {
+      content: '☐';
+      color: var(--primary);
+      font-size: 1rem;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    /* ── 와이어프레임 ── */
+    .wireframe {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      font-family: "JetBrains Mono", "Fira Code", monospace;
+      font-size: .82rem;
+      line-height: 1.8;
+      color: var(--text);
+      overflow-x: auto;
+    }
+    .wf-header  { color: var(--primary-dark); font-weight: 700; }
+    .wf-search  { color: var(--success); }
+    .wf-tab     { color: var(--accent); }
+    .wf-card    { color: var(--text-muted); }
+
+    /* ── 백로그 ── */
+    .backlog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 14px;
+    }
+    .backlog-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px 20px;
+      box-shadow: var(--shadow);
+    }
+    .backlog-item h4 { font-size: .9rem; font-weight: 700; margin-bottom: 6px; color: var(--accent); }
+    .backlog-item p  { font-size: .85rem; color: var(--text-muted); line-height: 1.55; }
+
+    /* ── 스택 배지 ── */
+    .stack-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 14px;
+    }
+    .stack-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px 20px;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .stack-role {
+      font-size: .72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .07em;
+      color: var(--text-muted);
+    }
+    .stack-file {
+      font-family: "JetBrains Mono", monospace;
+      font-size: .88rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+    }
+    .stack-desc { font-size: .82rem; color: var(--text-muted); }
+
+    /* ── 섹션 구분선 ── */
+    .divider {
+      border: none;
+      border-top: 2px dashed var(--border);
+      margin: 0 0 48px;
+    }
+
+    /* ── 반응형 ── */
+    @media (max-width: 640px) {
+      .roadmap-step { grid-template-columns: 80px 1fr; }
+      .roadmap-step::before { left: 39px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══ Hero ══ -->
+<div class="hero">
+  <div class="hero-badge">Project Plan · 2026</div>
+  <h1>TechDics<br>IT 용어 사전 웹서비스</h1>
+  <p>HTML5 + CSS3 + Vanilla JavaScript 기반 경량 정적 웹 애플리케이션<br>— 백엔드 없이 브라우저만으로 동작</p>
+  <div class="hero-goal">
+    <strong>핵심 목표</strong> — AI, 네트워크, 클라우드, 개발 언어 등 다양한 IT 분야의 용어를
+    누구나 빠르게 검색하고 카테고리별로 탐색할 수 있는 반응형 웹 서비스를
+    순수 HTML / CSS / JS로 구현합니다.
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- ══ 1. 프로젝트 개요 ══ -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-num">1</div>
+      <h2 class="section-title">프로젝트 개요</h2>
+    </div>
+    <div class="overview-grid">
+      <div class="overview-item">
+        <div class="overview-label">프로젝트명</div>
+        <div class="overview-value">TechDics</div>
+      </div>
+      <div class="overview-item">
+        <div class="overview-label">기술 스택</div>
+        <div class="overview-value">HTML5 · CSS3 · Vanilla JS</div>
+      </div>
+      <div class="overview-item">
+        <div class="overview-label">데이터 저장</div>
+        <div class="overview-value">data.json (서버리스)</div>
+      </div>
+      <div class="overview-item">
+        <div class="overview-label">배포 환경</div>
+        <div class="overview-value">GitHub Pages / Vercel</div>
+      </div>
+      <div class="overview-item">
+        <div class="overview-label">초기 목표 용어</div>
+        <div class="overview-value">200개 이상</div>
+      </div>
+    </div>
+  </section>
+  <hr class="divider">
+
+  <!-- ══ 2. 카테고리 ══ -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-num">2</div>
+      <h2 class="section-title">카테고리 구성 및 대표 용어</h2>
+    </div>
+    <div class="category-grid">
+
+      <div class="cat-card">
+        <div class="cat-card-header">
+          <span class="cat-icon">🤖</span>
+          <span class="cat-name">AI / 머신러닝</span>
+          <span class="cat-count">20개</span>
+        </div>
+        <div class="cat-tags">
+          <span class="tag">LLM</span><span class="tag">GPT</span><span class="tag">Transformer</span>
+          <span class="tag">RAG</span><span class="tag">Fine-tuning</span><span class="tag">Embedding</span>
+          <span class="tag">Vector DB</span><span class="tag">Prompt Engineering</span><span class="tag">Hallucination</span>
+          <span class="tag">CNN</span><span class="tag">Diffusion Model</span><span class="tag">Multimodal</span>
+          <span class="tag">Agent</span><span class="tag">MCP</span><span class="tag">Overfitting</span>
+        </div>
+      </div>
+
+      <div class="cat-card">
+        <div class="cat-card-header">
+          <span class="cat-icon">🌐</span>
+          <span class="cat-name">네트워크</span>
+          <span class="cat-count">20개</span>
+        </div>
+        <div class="cat-tags">
+          <span class="tag">TCP/IP</span><span class="tag">DNS</span><span class="tag">HTTP/HTTPS</span>
+          <span class="tag">TLS/SSL</span><span class="tag">VPN</span><span class="tag">CDN</span>
+          <span class="tag">BGP</span><span class="tag">SDN</span><span class="tag">Load Balancer</span>
+          <span class="tag">Zero Trust</span><span class="tag">OSI 7계층</span><span class="tag">WebSocket</span>
+          <span class="tag">gRPC</span><span class="tag">QUIC</span><span class="tag">Anycast</span>
+        </div>
+      </div>
+
+      <div class="cat-card">
+        <div class="cat-card-header">
+          <span class="cat-icon">☁️</span>
+          <span class="cat-name">클라우드 서비스</span>
+          <span class="cat-count">20개</span>
+        </div>
+        <div class="cat-tags">
+          <span class="tag">IaaS</span><span class="tag">PaaS</span><span class="tag">SaaS</span>
+          <span class="tag">Serverless</span><span class="tag">Kubernetes</span><span class="tag">Docker</span>
+          <span class="tag">MSA</span><span class="tag">CI/CD</span><span class="tag">Terraform</span>
+          <span class="tag">Service Mesh</span><span class="tag">Edge Computing</span><span class="tag">FinOps</span>
+          <span class="tag">EKS</span><span class="tag">Lambda</span><span class="tag">Multi-Cloud</span>
+        </div>
+      </div>
+
+      <div class="cat-card">
+        <div class="cat-card-header">
+          <span class="cat-icon">💻</span>
+          <span class="cat-name">개발 언어 / 프레임워크</span>
+          <span class="cat-count">20개</span>
+        </div>
+        <div class="cat-tags">
+          <span class="tag">REST</span><span class="tag">GraphQL</span><span class="tag">TypeScript</span>
+          <span class="tag">WebAssembly</span><span class="tag">Async/Await</span><span class="tag">Closure</span>
+          <span class="tag">ORM</span><span class="tag">MVC</span><span class="tag">GC</span>
+          <span class="tag">Monorepo</span><span class="tag">Transpiler</span><span class="tag">SDK</span>
+        </div>
+      </div>
+
+      <div class="cat-card">
+        <div class="cat-card-header">
+          <span class="cat-icon">🔒</span>
+          <span class="cat-name">보안 (Security)</span>
+          <span class="cat-count">20개</span>
+        </div>
+        <div class="cat-tags">
+          <span class="tag">Zero-Day</span><span class="tag">CVE</span><span class="tag">XSS</span>
+          <span class="tag">CSRF</span><span class="tag">SQL Injection</span><span class="tag">OWASP Top 10</span>
+          <span class="tag">OAuth2</span><span class="tag">JWT</span><span class="tag">MFA</span>
+          <span class="tag">SIEM</span><span class="tag">PTaaS</span><span class="tag">WAF</span>
+          <span class="tag">RBAC</span><span class="tag">Ransomware</span>
+        </div>
+      </div>
+
+      <div class="cat-card">
+        <div class="cat-card-header">
+          <span class="cat-icon">🗄️</span>
+          <span class="cat-name">데이터베이스 / 데이터</span>
+          <span class="cat-count">20개</span>
+        </div>
+        <div class="cat-tags">
+          <span class="tag">RDBMS</span><span class="tag">NoSQL</span><span class="tag">ACID</span>
+          <span class="tag">CAP 이론</span><span class="tag">Sharding</span><span class="tag">Index</span>
+          <span class="tag">ETL</span><span class="tag">Data Lake</span><span class="tag">OLAP</span>
+          <span class="tag">CDC</span><span class="tag">Graph DB</span><span class="tag">Redis</span>
+        </div>
+      </div>
+
+      <div class="cat-card">
+        <div class="cat-card-header">
+          <span class="cat-icon">🛠️</span>
+          <span class="cat-name">소프트웨어 공학</span>
+          <span class="cat-count">19개</span>
+        </div>
+        <div class="cat-tags">
+          <span class="tag">Agile</span><span class="tag">Scrum</span><span class="tag">TDD</span>
+          <span class="tag">DDD</span><span class="tag">Clean Architecture</span><span class="tag">SOLID</span>
+          <span class="tag">Design Pattern</span><span class="tag">Technical Debt</span><span class="tag">SLA/SLO/SLI</span>
+          <span class="tag">Observability</span><span class="tag">Feature Flag</span><span class="tag">A/B Testing</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+  <hr class="divider">
+
+  <!-- ══ 3. 파일 구조 ══ -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-num">3</div>
+      <h2 class="section-title">파일 구조</h2>
+    </div>
+    <div class="file-tree">
+<span class="dir">techdics/</span>
+├── <span class="file">index.html</span>          <span class="comment">← 메인 페이지 (검색창, 카테고리 탭, 카드 리스트)</span>
+├── <span class="file">style.css</span>           <span class="comment">← 전체 스타일 (CSS Variables, 다크모드, 반응형)</span>
+├── <span class="file">app.js</span>              <span class="comment">← 검색·필터·즐겨찾기 핵심 로직</span>
+└── <span class="dir">data/</span>
+    └── <span class="file">data.json</span>       <span class="comment">← 용어 데이터 (term, definition, category, tags, related)</span>
+    </div>
+  </section>
+  <hr class="divider">
+
+  <!-- ══ 4. 데이터 구조 ══ -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-num">4</div>
+      <h2 class="section-title">데이터 구조 <code style="font-size:.8rem; background:var(--surface2); padding:2px 8px; border-radius:6px; border:1px solid var(--border); color:var(--primary-dark);">data.json</code></h2>
+    </div>
+    <div class="code-block" style="margin-bottom:20px;">
+<span class="punct">[</span>
+  <span class="punct">{</span>
+    <span class="key">"id"</span><span class="punct">:</span>         <span class="str">"llm-001"</span><span class="punct">,</span>
+    <span class="key">"term"</span><span class="punct">:</span>       <span class="str">"LLM"</span><span class="punct">,</span>
+    <span class="key">"termKo"</span><span class="punct">:</span>     <span class="str">"대규모 언어 모델"</span><span class="punct">,</span>
+    <span class="key">"definition"</span><span class="punct">:</span> <span class="str">"수십억~수조 개의 파라미터로 학습된 딥러닝 기반 언어 모델..."</span><span class="punct">,</span>
+    <span class="key">"category"</span><span class="punct">:</span>   <span class="str">"ai"</span><span class="punct">,</span>
+    <span class="key">"tags"</span><span class="punct">:</span>       <span class="arr">["AI", "딥러닝", "NLP"]</span><span class="punct">,</span>
+    <span class="key">"related"</span><span class="punct">:</span>    <span class="arr">["transformer", "gpt", "fine-tuning"]</span><span class="punct">,</span>
+    <span class="key">"difficulty"</span><span class="punct">:</span> <span class="str">"intermediate"</span>
+  <span class="punct">}</span>
+<span class="punct">]</span>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>필드</th><th>타입</th><th>설명</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>id</code></td><td>string</td><td>고유 식별자 (카테고리 접두어 + 번호)</td></tr>
+          <tr><td><code>term</code></td><td>string</td><td>영문 용어</td></tr>
+          <tr><td><code>termKo</code></td><td>string</td><td>한국어 명칭 (없으면 빈 문자열)</td></tr>
+          <tr><td><code>definition</code></td><td>string</td><td>한국어 정의</td></tr>
+          <tr><td><code>category</code></td><td>string</td><td>카테고리 슬러그 (ai, network, cloud, dev, security, data, engineering)</td></tr>
+          <tr><td><code>tags</code></td><td>string[]</td><td>연관 태그</td></tr>
+          <tr><td><code>related</code></td><td>string[]</td><td>관련 용어 id</td></tr>
+          <tr><td><code>difficulty</code></td><td>string</td><td>beginner / intermediate / advanced</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+  <hr class="divider">
+
+  <!-- ══ 5. 핵심 기능 명세 ══ -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-num">5</div>
+      <h2 class="section-title">핵심 기능 명세</h2>
+    </div>
+    <div class="feature-list">
+      <div class="feature-item">
+        <h4>🔍 실시간 검색</h4>
+        <ul>
+          <li>입력과 동시에 영문·한국어 동시 매칭</li>
+          <li>Debounce 300ms 적용으로 입력 부하 최소화</li>
+          <li>검색어 하이라이팅 (결과 내 일치 단어 강조)</li>
+        </ul>
+      </div>
+      <div class="feature-item">
+        <h4>📂 카테고리 탭 필터</h4>
+        <ul>
+          <li>상단 탭 클릭 시 해당 카테고리 용어만 표시</li>
+          <li>검색과 카테고리 필터 동시 적용 가능</li>
+        </ul>
+      </div>
+      <div class="feature-item">
+        <h4>💬 용어 상세 모달</h4>
+        <ul>
+          <li>카드 클릭 시 정의·태그·관련 용어 표시</li>
+          <li>관련 용어 클릭 시 해당 용어로 바로 이동</li>
+        </ul>
+      </div>
+      <div class="feature-item">
+        <h4>⭐ 즐겨찾기</h4>
+        <ul>
+          <li><code>LocalStorage</code> 기반 저장 (브라우저 닫아도 유지)</li>
+          <li>즐겨찾기 탭에서 저장된 용어만 모아보기</li>
+        </ul>
+      </div>
+      <div class="feature-item">
+        <h4>🌙 다크 모드</h4>
+        <ul>
+          <li><code>prefers-color-scheme</code> 미디어 쿼리로 OS 설정 자동 감지</li>
+          <li>수동 토글 버튼 제공, 선택 값 <code>LocalStorage</code> 유지</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+  <hr class="divider">
+
+  <!-- ══ 6. 로드맵 ══ -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-num">6</div>
+      <h2 class="section-title">단계별 개발 로드맵</h2>
+    </div>
+    <div class="roadmap">
+
+      <div class="roadmap-step">
+        <div class="roadmap-week"><span class="week-badge">W1</span></div>
+        <div class="roadmap-body">
+          <h4>데이터 &amp; 구조 설계</h4>
+          <ul class="checklist">
+            <li><code>data.json</code> 스키마 확정</li>
+            <li>카테고리별 용어 30개 이상 입력 (총 200개 목표)</li>
+            <li><code>index.html</code> 시맨틱 마크업 완성</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="roadmap-step">
+        <div class="roadmap-week"><span class="week-badge">W2</span></div>
+        <div class="roadmap-body">
+          <h4>UI 구현</h4>
+          <ul class="checklist">
+            <li>CSS Variables 기반 라이트/다크 테마 작성</li>
+            <li>카테고리 탭, 검색창, 카드 그리드 레이아웃</li>
+            <li>모달 팝업 CSS 애니메이션</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="roadmap-step">
+        <div class="roadmap-week"><span class="week-badge">W3</span></div>
+        <div class="roadmap-body">
+          <h4>JS 기능 구현</h4>
+          <ul class="checklist">
+            <li><code>fetch</code>로 <code>data.json</code> 로드 후 메모리 인덱스 생성</li>
+            <li>실시간 검색 필터 (Debounce + 하이라이팅)</li>
+            <li>카테고리 탭 필터 로직</li>
+            <li>모달 열기/닫기 + 관련 용어 링크</li>
+            <li>즐겨찾기 <code>LocalStorage</code> 연동</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="roadmap-step">
+        <div class="roadmap-week"><span class="week-badge">W4</span></div>
+        <div class="roadmap-body">
+          <h4>마무리 &amp; 배포</h4>
+          <ul class="checklist">
+            <li>모바일 반응형 최종 점검</li>
+            <li>용어 200개 전체 입력 완료</li>
+            <li>GitHub Pages 배포</li>
+            <li>README 작성</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+  <hr class="divider">
+
+  <!-- ══ 7. 와이어프레임 ══ -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-num">7</div>
+      <h2 class="section-title">UI 레이아웃 구성 (와이어프레임)</h2>
+    </div>
+    <div class="wireframe">
+<span class="wf-header">┌─────────────────────────────────────────────────────────┐
+│  🔤 TechDics                      [🌙 다크모드]  [⭐]   │  ← header
+├─────────────────────────────────────────────────────────┤</span>
+<span class="wf-search">│  [ 🔍  용어를 검색하세요 (한/영 동시 지원)             ] │  ← 검색창
+├─────────────────────────────────────────────────────────┤</span>
+<span class="wf-tab">│  [전체]  [🤖 AI]  [🌐 네트워크]  [☁️ 클라우드]  [🔒 보안] …   │  ← 카테고리 탭
+├─────────────────────────────────────────────────────────┤</span>
+<span class="wf-card">│  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌──────────┐ │
+│  │  LLM     │  │  Docker  │  │  XSS     │  │  TCP/IP  │ │
+│  │  AI 🤖   │  │  Cloud ☁ │  │  보안 🔒  │  │  네트워크 │ │
+│  │ ★ 즐겨찾기│  │ ★ 즐겨찾기│  │ ★ 즐겨찾기│  │ ★ 즐겨찾기│ │
+│  └──────────┘  └──────────┘  └──────────┘  └──────────┘ │
+└─────────────────────────────────────────────────────────┘</span>
+    </div>
+  </section>
+  <hr class="divider">
+
+  <!-- ══ 8. 기술 스택 ══ -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-num">8</div>
+      <h2 class="section-title">기술 스택 상세</h2>
+    </div>
+    <div class="stack-grid">
+      <div class="stack-card">
+        <div class="stack-role">Structure</div>
+        <div class="stack-file">index.html</div>
+        <div class="stack-desc">시맨틱 마크업, 모달 구조, 탭 컨테이너</div>
+      </div>
+      <div class="stack-card">
+        <div class="stack-role">Styling</div>
+        <div class="stack-file">style.css</div>
+        <div class="stack-desc">CSS Variables 테마, Grid/Flexbox 레이아웃, 미디어 쿼리</div>
+      </div>
+      <div class="stack-card">
+        <div class="stack-role">Logic</div>
+        <div class="stack-file">app.js</div>
+        <div class="stack-desc">검색·필터·모달·즐겨찾기 전체 핵심 로직</div>
+      </div>
+      <div class="stack-card">
+        <div class="stack-role">Data</div>
+        <div class="stack-file">data/data.json</div>
+        <div class="stack-desc">용어 정적 데이터베이스 (외부 라이브러리 없음)</div>
+      </div>
+    </div>
+  </section>
+  <hr class="divider">
+
+  <!-- ══ 9. 백로그 ══ -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-num">9</div>
+      <h2 class="section-title">향후 확장 아이디어 (Backlog)</h2>
+    </div>
+    <div class="backlog-grid">
+      <div class="backlog-item">
+        <h4>🤖 AI 요약 연동</h4>
+        <p>OpenAI / Gemini API 연결로 '쉬운 설명' 버튼 제공 — 실시간 비유 설명 생성</p>
+      </div>
+      <div class="backlog-item">
+        <h4>🎮 퀴즈 모드</h4>
+        <p>데일리 5문항 IT 용어 퀴즈 미니 게임 컴포넌트 추가</p>
+      </div>
+      <div class="backlog-item">
+        <h4>🤝 용어 기여</h4>
+        <p>GitHub PR 기반 커뮤니티 용어 제안 워크플로우</p>
+      </div>
+      <div class="backlog-item">
+        <h4>🌍 다국어</h4>
+        <p>영문 정의 추가 — 한국어·영어 병행 표시로 학습 효과 증대</p>
+      </div>
+      <div class="backlog-item">
+        <h4>📱 PWA</h4>
+        <p>Service Worker 등록으로 오프라인 검색 지원 및 홈 화면 설치 가능</p>
+      </div>
+    </div>
+  </section>
+
+</div><!-- /container -->
+
+</body>
+</html>
