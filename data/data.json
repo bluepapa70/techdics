@@ -368,5 +368,205 @@
     "tags": ["데이터", "파이프라인", "데이터엔지니어링"],
     "related": ["data-001", "data-002"],
     "difficulty": "intermediate"
+  },
+  {
+    "id": "security-007",
+    "term": "CVE",
+    "termKo": "공개 취약점 및 노출",
+    "definition": "공개적으로 알려진 소프트웨어 취약점에 고유 식별자를 부여하는 미국 MITRE의 표준 체계. 'CVE-연도-번호' 형식으로 표기하며, NVD에서 심각도(CVSS 점수)와 패치 정보를 관리한다.",
+    "category": "security",
+    "tags": ["보안", "취약점", "표준"],
+    "related": ["security-008", "security-013"],
+    "difficulty": "beginner"
+  },
+  {
+    "id": "security-008",
+    "term": "Buffer Overflow",
+    "termKo": "버퍼 오버플로우",
+    "definition": "프로그램이 할당된 메모리 버퍼 경계를 초과해 데이터를 쓰는 취약점. 인접 메모리를 덮어써 프로그램 흐름을 변조하거나 임의 코드를 실행할 수 있다. C/C++ 계열 언어에서 주로 발생한다.",
+    "category": "security",
+    "tags": ["보안", "취약점", "메모리"],
+    "related": ["security-010", "security-007"],
+    "difficulty": "advanced"
+  },
+  {
+    "id": "security-009",
+    "term": "SSRF",
+    "termKo": "서버 측 요청 위조",
+    "definition": "공격자가 서버로 하여금 내부 네트워크 자원이나 외부 서비스에 임의 HTTP 요청을 보내게 만드는 취약점. 클라우드 환경의 메타데이터 서버(169.254.169.254) 탈취에 악용되기도 한다.",
+    "category": "security",
+    "tags": ["보안", "웹", "OWASP"],
+    "related": ["security-001", "security-006"],
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "security-010",
+    "term": "RCE",
+    "termKo": "원격 코드 실행",
+    "definition": "공격자가 원격에서 피해 시스템에 임의 코드를 실행할 수 있는 취약점 유형. 버퍼 오버플로우, 역직렬화 취약점, 커맨드 인젝션 등을 통해 발생하며 심각도가 가장 높은 취약점 중 하나다.",
+    "category": "security",
+    "tags": ["보안", "취약점", "공격"],
+    "related": ["security-008", "security-011", "security-012"],
+    "difficulty": "advanced"
+  },
+  {
+    "id": "security-011",
+    "term": "XXE",
+    "termKo": "XML 외부 엔티티 공격",
+    "definition": "XML 파서가 외부 엔티티 참조를 처리할 때 발생하는 취약점. 공격자가 악의적인 XML을 전송해 서버 내부 파일 읽기, SSRF, 서비스 거부 공격 등을 유발할 수 있다.",
+    "category": "security",
+    "tags": ["보안", "웹", "OWASP"],
+    "related": ["security-009", "security-002"],
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "security-012",
+    "term": "Insecure Deserialization",
+    "termKo": "안전하지 않은 역직렬화",
+    "definition": "신뢰할 수 없는 출처의 직렬화된 데이터를 검증 없이 역직렬화할 때 발생하는 취약점. 객체 주입을 통해 원격 코드 실행이나 권한 상승으로 이어질 수 있으며 OWASP Top 10에 포함된다.",
+    "category": "security",
+    "tags": ["보안", "취약점", "OWASP"],
+    "related": ["security-010", "security-013"],
+    "difficulty": "advanced"
+  },
+  {
+    "id": "security-013",
+    "term": "IDOR",
+    "termKo": "안전하지 않은 직접 객체 참조",
+    "definition": "서버가 사용자의 접근 권한을 검증하지 않고 URL·파라미터의 객체 식별자를 그대로 사용할 때 발생하는 접근 제어 취약점. 타인의 계정 정보나 파일에 무단 접근할 수 있다.",
+    "category": "security",
+    "tags": ["보안", "웹", "접근제어"],
+    "related": ["security-001", "security-014"],
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "security-014",
+    "term": "Path Traversal",
+    "termKo": "경로 탐색 공격",
+    "definition": "'../' 같은 경로 조작 문자를 이용해 웹 루트 밖의 파일에 접근하는 취약점. /etc/passwd 같은 시스템 파일을 읽거나 설정 파일을 탈취하는 데 악용된다.",
+    "category": "security",
+    "tags": ["보안", "웹", "파일시스템"],
+    "related": ["security-013", "security-002"],
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "security-015",
+    "term": "Privilege Escalation",
+    "termKo": "권한 상승",
+    "definition": "낮은 권한으로 시스템에 접근한 공격자가 취약점을 악용해 관리자·루트 권한을 획득하는 공격. 수직적(일반→관리자)과 수평적(다른 동일 권한 계정 탈취) 두 유형이 있다.",
+    "category": "security",
+    "tags": ["보안", "취약점", "접근제어"],
+    "related": ["security-010", "security-013"],
+    "difficulty": "advanced"
+  },
+  {
+    "id": "security-016",
+    "term": "Supply Chain Attack",
+    "termKo": "공급망 공격",
+    "definition": "소프트웨어 빌드·배포 파이프라인이나 서드파티 라이브러리에 악성 코드를 심어 최종 사용자를 감염시키는 공격. 2020년 SolarWinds 사건이 대표적이며 npm 패키지 등 오픈소스 생태계가 주요 표적이다.",
+    "category": "security",
+    "tags": ["보안", "취약점", "공급망"],
+    "related": ["security-007", "cloud-004"],
+    "difficulty": "advanced"
+  },
+  {
+    "id": "security-017",
+    "term": "Command Injection",
+    "termKo": "커맨드 인젝션",
+    "definition": "사용자 입력값이 OS 명령어 실행 함수에 그대로 전달될 때 발생하는 취약점. 공격자가 세미콜론·파이프 등을 이용해 임의 시스템 명령을 추가 실행하며, 심각할 경우 RCE로 이어진다.",
+    "category": "security",
+    "tags": ["보안", "웹", "OWASP"],
+    "related": ["security-002", "security-010"],
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "security-018",
+    "term": "Clickjacking",
+    "termKo": "클릭재킹",
+    "definition": "악성 사이트가 투명한 iframe으로 정상 사이트를 겹쳐 사용자가 의도하지 않은 버튼을 클릭하게 만드는 공격. X-Frame-Options 또는 CSP frame-ancestors 헤더로 방어한다.",
+    "category": "security",
+    "tags": ["보안", "웹", "UI"],
+    "related": ["security-001", "security-006"],
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "security-019",
+    "term": "Open Redirect",
+    "termKo": "오픈 리다이렉트",
+    "definition": "웹 애플리케이션이 사용자 입력값을 검증 없이 리다이렉트 대상으로 사용하는 취약점. 피싱 링크를 신뢰할 수 있는 도메인처럼 위장하거나 OAuth 토큰을 탈취하는 데 악용된다.",
+    "category": "security",
+    "tags": ["보안", "웹", "피싱"],
+    "related": ["security-001", "security-005"],
+    "difficulty": "beginner"
+  },
+  {
+    "id": "security-020",
+    "term": "Race Condition",
+    "termKo": "경쟁 조건",
+    "definition": "두 개 이상의 프로세스·스레드가 공유 자원에 동시 접근할 때 실행 순서에 따라 예기치 않은 결과가 발생하는 취약점. 금융 거래의 이중 출금이나 파일 권한 우회에 악용된다.",
+    "category": "security",
+    "tags": ["보안", "취약점", "동시성"],
+    "related": ["security-021", "security-015"],
+    "difficulty": "advanced"
+  },
+  {
+    "id": "security-021",
+    "term": "TOCTOU",
+    "termKo": "검사-사용 시점 불일치",
+    "definition": "자원의 상태를 검사(Time-of-Check)한 시점과 실제 사용(Time-of-Use)하는 시점 사이의 간격을 노리는 경쟁 조건 취약점. 파일 시스템 권한 우회나 임시 파일 공격에서 자주 나타난다.",
+    "category": "security",
+    "tags": ["보안", "취약점", "동시성"],
+    "related": ["security-020", "security-015"],
+    "difficulty": "advanced"
+  },
+  {
+    "id": "security-022",
+    "term": "Zero-Day",
+    "termKo": "제로데이",
+    "definition": "소프트웨어 벤더가 아직 인지하지 못했거나 패치가 없는 취약점, 또는 그 취약점을 노리는 공격. '0일'은 개발사가 대응할 시간이 전혀 없음을 의미하며 APT 그룹의 주요 무기다.",
+    "category": "security",
+    "tags": ["보안", "취약점", "APT"],
+    "related": ["security-007", "security-010"],
+    "difficulty": "advanced"
+  },
+  {
+    "id": "security-023",
+    "term": "Log Injection",
+    "termKo": "로그 인젝션",
+    "definition": "공격자가 조작된 입력값에 개행 문자나 특수 구문을 삽입해 로그 파일을 위조하거나 로그 분석 도구를 공격하는 기법. Log4Shell(CVE-2021-44228)이 로그 인젝션 기반 RCE의 대표 사례다.",
+    "category": "security",
+    "tags": ["보안", "웹", "로그"],
+    "related": ["security-010", "security-017"],
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "security-024",
+    "term": "Subdomain Takeover",
+    "termKo": "서브도메인 탈취",
+    "definition": "삭제된 클라우드 서비스(GitHub Pages, S3 등)를 가리키던 DNS CNAME 레코드가 남아 있을 때, 공격자가 해당 서비스를 재등록해 서브도메인을 장악하는 공격.",
+    "category": "security",
+    "tags": ["보안", "DNS", "클라우드"],
+    "related": ["network-002", "security-019"],
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "security-025",
+    "term": "Broken Access Control",
+    "termKo": "취약한 접근 제어",
+    "definition": "인증된 사용자가 허가되지 않은 기능·데이터에 접근할 수 있는 취약점의 총칭. OWASP Top 10 2021년판 1위 항목으로, IDOR·권한 상승·수평적 권한 이동 등이 포함된다.",
+    "category": "security",
+    "tags": ["보안", "OWASP", "접근제어"],
+    "related": ["security-013", "security-015", "security-003"],
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "security-026",
+    "term": "Security Misconfiguration",
+    "termKo": "보안 설정 오류",
+    "definition": "기본 계정·패스워드 미변경, 불필요한 포트 오픈, 상세 오류 메시지 노출, 클라우드 스토리지 퍼블릭 공개 등 잘못된 보안 설정으로 인한 취약점. OWASP Top 10 상위 항목이며 사고 원인 1위 중 하나다.",
+    "category": "security",
+    "tags": ["보안", "OWASP", "설정"],
+    "related": ["security-025", "security-022"],
+    "difficulty": "beginner"
   }
 ]
