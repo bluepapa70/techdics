@@ -1,0 +1,272 @@
+[
+  {
+    "id": "ai-001",
+    "term": "LLM",
+    "termKo": "대규모 언어 모델",
+    "definition": "수십억~수조 개의 파라미터로 학습된 딥러닝 기반 언어 모델로, 텍스트 생성·번역·요약 등 다양한 언어 작업을 수행한다.",
+    "category": "ai",
+    "tags": ["AI", "딥러닝", "NLP"],
+    "related": ["ai-002", "ai-003"],
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "ai-002",
+    "term": "GPT",
+    "termKo": "생성형 사전학습 트랜스포머",
+    "definition": "OpenAI가 개발한 대규모 언어 모델 시리즈. Transformer 아키텍처 기반으로 방대한 텍스트 데이터를 사전학습하여 자연어 생성에 뛰어난 성능을 보인다.",
+    "category": "ai",
+    "tags": ["AI", "OpenAI", "생성형AI"],
+    "related": ["ai-001", "ai-003"],
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "ai-003",
+    "term": "Transformer",
+    "termKo": "트랜스포머",
+    "definition": "Self-Attention 메커니즘을 핵심으로 사용하는 딥러닝 아키텍처. 2017년 구글이 발표한 'Attention is All You Need' 논문에서 제안되었으며, 현대 LLM의 기반이 된다.",
+    "category": "ai",
+    "tags": ["AI", "딥러닝", "아키텍처"],
+    "related": ["ai-001", "ai-002"],
+    "difficulty": "advanced"
+  },
+  {
+    "id": "ai-004",
+    "term": "RAG",
+    "termKo": "검색 증강 생성",
+    "definition": "외부 지식 베이스에서 관련 정보를 검색한 뒤 LLM이 해당 정보를 참고해 답변을 생성하는 기법. 모델의 환각(Hallucination) 문제를 줄이는 데 효과적이다.",
+    "category": "ai",
+    "tags": ["AI", "검색", "LLM"],
+    "related": ["ai-001"],
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "ai-005",
+    "term": "Hallucination",
+    "termKo": "환각",
+    "definition": "AI 언어 모델이 사실과 다른 내용을 그럴듯하게 생성하는 현상. 모델이 학습 데이터에 없는 정보를 추론하거나 잘못된 사실을 자신 있게 제시할 때 발생한다.",
+    "category": "ai",
+    "tags": ["AI", "LLM", "신뢰성"],
+    "related": ["ai-001", "ai-004"],
+    "difficulty": "beginner"
+  },
+  {
+    "id": "network-001",
+    "term": "TCP/IP",
+    "termKo": "",
+    "definition": "인터넷 통신의 핵심 프로토콜 스택. TCP(전송 제어 프로토콜)는 신뢰성 있는 데이터 전송을, IP(인터넷 프로토콜)는 패킷 라우팅을 담당한다.",
+    "category": "network",
+    "tags": ["네트워크", "프로토콜", "인터넷"],
+    "related": ["network-002", "network-003"],
+    "difficulty": "beginner"
+  },
+  {
+    "id": "network-002",
+    "term": "DNS",
+    "termKo": "도메인 네임 시스템",
+    "definition": "사람이 읽기 쉬운 도메인 이름(예: google.com)을 IP 주소로 변환하는 분산 계층형 데이터베이스 시스템. 인터넷의 전화번호부에 비유된다.",
+    "category": "network",
+    "tags": ["네트워크", "도메인", "인터넷"],
+    "related": ["network-001"],
+    "difficulty": "beginner"
+  },
+  {
+    "id": "network-003",
+    "term": "HTTP/HTTPS",
+    "termKo": "",
+    "definition": "웹 브라우저와 서버 간 데이터를 주고받는 프로토콜. HTTPS는 TLS/SSL로 암호화된 HTTP로, 데이터 도청과 변조를 방지한다.",
+    "category": "network",
+    "tags": ["네트워크", "웹", "보안"],
+    "related": ["network-001", "security-001"],
+    "difficulty": "beginner"
+  },
+  {
+    "id": "network-004",
+    "term": "Load Balancer",
+    "termKo": "로드 밸런서",
+    "definition": "들어오는 네트워크 트래픽을 여러 서버에 균등하게 분산시켜 서비스 가용성과 처리량을 높이는 장치 또는 소프트웨어.",
+    "category": "network",
+    "tags": ["네트워크", "인프라", "가용성"],
+    "related": ["cloud-001"],
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "cloud-001",
+    "term": "Docker",
+    "termKo": "도커",
+    "definition": "애플리케이션과 그 실행 환경을 컨테이너로 패키징하는 플랫폼. 'Build once, run anywhere' 원칙 아래 개발·배포 환경 차이를 없앤다.",
+    "category": "cloud",
+    "tags": ["클라우드", "컨테이너", "DevOps"],
+    "related": ["cloud-002", "cloud-003"],
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "cloud-002",
+    "term": "Kubernetes",
+    "termKo": "쿠버네티스",
+    "definition": "컨테이너화된 애플리케이션의 배포·확장·관리를 자동화하는 오픈소스 오케스트레이션 플랫폼. Google이 개발하고 CNCF에 기증했다.",
+    "category": "cloud",
+    "tags": ["클라우드", "컨테이너", "오케스트레이션"],
+    "related": ["cloud-001"],
+    "difficulty": "advanced"
+  },
+  {
+    "id": "cloud-003",
+    "term": "Serverless",
+    "termKo": "서버리스",
+    "definition": "서버 인프라 관리 없이 함수 단위로 코드를 실행하는 클라우드 컴퓨팅 모델. AWS Lambda, Google Cloud Functions 등이 대표적이다.",
+    "category": "cloud",
+    "tags": ["클라우드", "FaaS", "AWS"],
+    "related": ["cloud-001", "cloud-002"],
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "cloud-004",
+    "term": "CI/CD",
+    "termKo": "지속적 통합/지속적 배포",
+    "definition": "코드 변경사항을 자동으로 빌드·테스트(CI)하고 프로덕션에 배포(CD)하는 소프트웨어 개발 방법론. GitHub Actions, Jenkins 등이 활용된다.",
+    "category": "cloud",
+    "tags": ["DevOps", "자동화", "배포"],
+    "related": ["cloud-001", "cloud-002"],
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "dev-001",
+    "term": "API",
+    "termKo": "애플리케이션 프로그래밍 인터페이스",
+    "definition": "소프트웨어 간 데이터와 기능을 공유하기 위한 표준화된 인터페이스. 요청(Request)과 응답(Response) 규약을 정의해 서로 다른 시스템이 통신할 수 있게 한다.",
+    "category": "dev",
+    "tags": ["개발", "웹", "통신"],
+    "related": ["dev-002", "dev-003"],
+    "difficulty": "beginner"
+  },
+  {
+    "id": "dev-002",
+    "term": "REST",
+    "termKo": "REST API",
+    "definition": "HTTP 프로토콜을 기반으로 자원(Resource)을 URI로 표현하고, GET·POST·PUT·DELETE 등의 HTTP 메서드로 CRUD 작업을 수행하는 아키텍처 스타일.",
+    "category": "dev",
+    "tags": ["개발", "API", "HTTP"],
+    "related": ["dev-001", "dev-003"],
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "dev-003",
+    "term": "GraphQL",
+    "termKo": "",
+    "definition": "Facebook이 개발한 API 쿼리 언어. 클라이언트가 필요한 데이터 구조를 직접 명시해 요청하므로 over-fetching과 under-fetching 문제를 해결한다.",
+    "category": "dev",
+    "tags": ["개발", "API", "쿼리"],
+    "related": ["dev-001", "dev-002"],
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "dev-004",
+    "term": "TypeScript",
+    "termKo": "타입스크립트",
+    "definition": "Microsoft가 개발한 JavaScript의 정적 타입 슈퍼셋. 타입 오류를 컴파일 타임에 잡아내고 코드 자동완성·리팩토링을 강화하여 대형 프로젝트 유지보수성을 높인다.",
+    "category": "dev",
+    "tags": ["개발", "JavaScript", "타입"],
+    "related": [],
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "security-001",
+    "term": "XSS",
+    "termKo": "크로스 사이트 스크립팅",
+    "definition": "공격자가 웹 페이지에 악성 스크립트를 삽입해 다른 사용자의 브라우저에서 실행시키는 공격. OWASP Top 10에 포함된 대표적 웹 취약점이다.",
+    "category": "security",
+    "tags": ["보안", "웹", "OWASP"],
+    "related": ["security-002", "security-003"],
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "security-002",
+    "term": "SQL Injection",
+    "termKo": "SQL 인젝션",
+    "definition": "사용자 입력값에 악의적인 SQL 구문을 삽입해 데이터베이스를 무단 조회·변조하는 공격. 입력값 검증과 Prepared Statement 사용으로 방어한다.",
+    "category": "security",
+    "tags": ["보안", "DB", "OWASP"],
+    "related": ["security-001"],
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "security-003",
+    "term": "Zero Trust",
+    "termKo": "제로 트러스트",
+    "definition": "'아무것도 신뢰하지 않는다'는 원칙 아래 내부 네트워크라도 모든 접근을 검증하는 보안 모델. 사용자·기기·위치에 관계없이 최소 권한 원칙을 적용한다.",
+    "category": "security",
+    "tags": ["보안", "네트워크", "인증"],
+    "related": [],
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "security-004",
+    "term": "JWT",
+    "termKo": "JSON 웹 토큰",
+    "definition": "Header·Payload·Signature 세 부분으로 구성된 자기완결형 인증 토큰. 서버 세션 없이 사용자 인증 정보를 안전하게 전달하는 데 사용된다.",
+    "category": "security",
+    "tags": ["보안", "인증", "API"],
+    "related": ["security-003"],
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "data-001",
+    "term": "RDBMS",
+    "termKo": "관계형 데이터베이스 관리 시스템",
+    "definition": "테이블(행·열) 구조로 데이터를 저장하고 SQL로 조회·조작하는 데이터베이스 시스템. MySQL, PostgreSQL, Oracle 등이 대표적이다.",
+    "category": "data",
+    "tags": ["데이터", "DB", "SQL"],
+    "related": ["data-002"],
+    "difficulty": "beginner"
+  },
+  {
+    "id": "data-002",
+    "term": "NoSQL",
+    "termKo": "",
+    "definition": "고정 스키마 없이 문서·키-값·그래프·컬럼 형태로 데이터를 저장하는 비관계형 DB. 수평 확장이 용이해 대용량 비정형 데이터 처리에 적합하다.",
+    "category": "data",
+    "tags": ["데이터", "DB", "확장성"],
+    "related": ["data-001"],
+    "difficulty": "beginner"
+  },
+  {
+    "id": "data-003",
+    "term": "Redis",
+    "termKo": "",
+    "definition": "인메모리 키-값 저장소. 극도로 빠른 읽기·쓰기 속도 덕분에 캐시·세션 저장·실시간 순위판·메시지 브로커 등 다양한 용도로 사용된다.",
+    "category": "data",
+    "tags": ["데이터", "캐시", "인메모리"],
+    "related": ["data-002"],
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "engineering-001",
+    "term": "Agile",
+    "termKo": "애자일",
+    "definition": "짧은 개발 주기(스프린트)를 반복하며 고객 피드백을 빠르게 반영하는 소프트웨어 개발 방법론. 변화에 유연하게 대응하고 지속적인 가치 전달을 목표로 한다.",
+    "category": "engineering",
+    "tags": ["개발방법론", "협업", "프로세스"],
+    "related": ["engineering-002"],
+    "difficulty": "beginner"
+  },
+  {
+    "id": "engineering-002",
+    "term": "TDD",
+    "termKo": "테스트 주도 개발",
+    "definition": "구현 코드보다 테스트 코드를 먼저 작성하는 개발 방법론. Red(실패 테스트 작성) → Green(통과하는 최소 코드) → Refactor 사이클을 반복한다.",
+    "category": "engineering",
+    "tags": ["테스트", "개발방법론", "품질"],
+    "related": ["engineering-001"],
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "engineering-003",
+    "term": "Technical Debt",
+    "termKo": "기술 부채",
+    "definition": "빠른 개발을 위해 임시방편으로 작성된 코드가 나중에 추가 작업 비용으로 돌아오는 개념. 이자처럼 방치할수록 해결 비용이 커진다.",
+    "category": "engineering",
+    "tags": ["코드품질", "리팩토링", "개발방법론"],
+    "related": ["engineering-001"],
+    "difficulty": "beginner"
+  }
+]
